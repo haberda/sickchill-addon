@@ -1,19 +1,16 @@
-FROM bbernhard/signal-cli-rest-api:0.37
+FROM linuxserver/sickchill:2021.3.10.post1-ls57
 
-LABEL io.hass.version="0.37.2" io.hass.type="addon" io.hass.arch="armhf|aarch64|amd64"
+LABEL io.hass.version="ls57" io.hass.type="addon" io.hass.arch="armhf|aarch64|amd64"
 
-COPY options.sh /options.sh
+ENV XDG_DATA_HOME="/data" \
+XDG_CONFIG_HOME="/data"
 
-RUN ["chmod", "+x", "/options.sh"]
+# modify/copy files
 
-RUN apt-get clean \
+RUN sed -i "s|config|data|g" /etc/cont-init.d/*
 
-        && apt-get update \
+RUN sed -i "s|config|data|g" /etc/services.d/sickchill/*
 
-        && apt-get install -y --no-install-recommends jq
+RUN rm -r /media
 
-WORKDIR /data/data/
-
-ENTRYPOINT ["/options.sh"]
-
-VOLUME ["/data"]
+VOLUME ["/share", "/ssl", "/data", "/media"]
