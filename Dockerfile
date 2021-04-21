@@ -1,6 +1,6 @@
-FROM linuxserver/sickchill:2021.3.10.post1-ls57
+FROM linuxserver/sickchill:version-2021.4.10
 
-LABEL io.hass.version="ls57" io.hass.type="addon" io.hass.arch="armhf|aarch64|amd64"
+LABEL io.hass.version="2021.4.10" io.hass.type="addon" io.hass.arch="armhf|aarch64|amd64"
 
 ENV XDG_DATA_HOME="/data" \
 XDG_CONFIG_HOME="/data"
